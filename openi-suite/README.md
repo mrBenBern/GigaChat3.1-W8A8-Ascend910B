@@ -30,5 +30,7 @@ _Инструмент > воспоминание: весь порядок зае
 
 ## Артефакты/выгрузка
 - Чекпойнт: `/tmp/models/giga31_w8a8` (11 ГБ, формат ModelSlim: description.json + w8a8_dynamic safetensors ×3 + index).
-- Каналы сохранения (в порядке зрелости): (а) датасет платформы — если создан вебом (`openi dataset upload MutTechDev/<dataset> /tmp/giga31_w8a8.tar` после `openi login`); (б) git-LFS репо (проверка batch-API); (в) TRAIN-задача output (персистентен, у DEBUG — нет).
+- **Канал №1 (проверен живьём 21.11): git-LFS batch API** — токен-Basic, без сессий: `POST /{repo}.git/info/lfs/objects/batch` (Content-Type: application/vnd.git-lfs+json, {operation,objects:[{oid:sha256,size}]}) → PUT по href → verify. Round-trip подтверждён. Скрипт: `g12_lfs_save.py` (tar → чанки 4 ГБ → batch/PUT/verify). ОСТОРОЖНО: в PowerShell тело LFS передавать только через файл (-d @file) — кавычки режутся!
+- Канал №2: датасет платформы — **создание найдено в API**: `POST /api/v1/dataset/create` (reqToken, {name,is_private}); на токене Family uid:0 — проверить после ротации токена.
+- Канал №3: TRAIN-задача output (персистентен, у DEBUG — нет) — не тестирован.
 - Логи serve (`/tmp/vllm_w8a8.log`) — коммитить в репо при крахе (материал для issue).
