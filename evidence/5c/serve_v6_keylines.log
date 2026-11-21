@@ -1,0 +1,2 @@
+(APIServer pid=6992) INFO:     Application startup complete.
+(EngineCore_DP0 pid=7404) [SHIM] file-patch active T=1049 S=1049 H=32 scale=0.14467962580268923 mask_type=mask_type_triu

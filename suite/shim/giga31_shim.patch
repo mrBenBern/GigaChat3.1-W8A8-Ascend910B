@@ -1,0 +1,71 @@
+--- /usr/local/python3.11.13/lib/python3.11/site-packages/vllm_ascend/attention/mla_v1.py.bak5c	2026-11-22 04:39:26.933746080 +0800
++++ /usr/local/python3.11.13/lib/python3.11/site-packages/vllm_ascend/attention/mla_v1.py	2026-11-22 04:49:16.526110149 +0800
+@@ -1,3 +1,41 @@
++
++# === GIGA FIA SHIM (onion 5c) ===
++def _giga_shim(**kw):
++    import torch
++    import torch_npu
++    q = torch.cat([kw['q_nope'], kw['q_rope']], dim=-1)   # [T,H,192]
++    k = torch.cat([kw['k_nope'], kw['k_rope']], dim=-1)   # [S,H,192]
++    v = kw['value']                                       # [S,H,192]
++    T, H, D = q.shape
++    S = k.shape[0]
++    qb = q.unsqueeze(0)                   # [1,H,T,192]
++    kb = k.unsqueeze(0)                   # [1,H,S,192]
++    vb = v.unsqueeze(0)                   # [1,H,S,192]
++    am = None
++    m = kw.get('mask')
++    if m is not None and kw.get('mask_type', 'mask_type_triu') != 'no_mask':
++        if m.shape[-2] >= T and m.shape[-1] >= S:
++            am = (m <= -1e8)[..., :T, :S]
++        else:
++            am = torch.triu(torch.ones(T, S, device=q.device, dtype=torch.bool), 1)
++        while am.dim() < 4:
++            am = am.unsqueeze(0)
++    if not getattr(_giga_shim, 'said', False):
++        print('[SHIM] file-patch active T=%s S=%s H=%s scale=%s mask_type=%s' % (T, S, H, kw.get('qk_scale'), kw.get('mask_type')), flush=True)
++        _giga_shim.said = True
++    attn = torch_npu.npu_fused_infer_attention_score(
++        qb, kb, vb, num_heads=H, num_key_value_heads=kw.get('kv_head_num', H) or H,
++        scale=kw.get('qk_scale', D ** -0.5), input_layout='BSND',
++        atten_mask=am, sparse_mode=0)
++    if isinstance(attn, (tuple, list)):
++        attn = attn[0]
++    attn = attn.squeeze(0)                # [T,H,192]
++    out = kw.get('output')
++    if out is not None:
++        out.copy_(attn.reshape(out.shape))
++        return out
++    return attn.reshape(T, H, v.shape[-1])
++
+ from dataclasses import dataclass
+ from typing import (TYPE_CHECKING, ClassVar, NamedTuple, Optional, Tuple, Type,
+                     TypeVar)
+@@ -566,7 +604,7 @@
+ 
+     def _v_up_proj(self, x):
+         if x.dtype in [torch.float16, torch.bfloat16] \
+-                and hasattr(torch.ops._C_ascend, "batch_matmul_transpose"):
++                and False:
+             x = x.view(-1, self.num_heads, self.kv_lora_rank)
+             b, _, _ = x.shape
+             res = torch.empty((b, self.num_heads, self.v_head_dim),
+@@ -810,7 +848,7 @@
+             k_nope, v = kv_nope\
+                 .split([self.qk_nope_head_dim, self.v_head_dim], dim=-1)
+             k_pe = k_pe.expand((*k_nope.shape[:-1], -1))
+-            torch_npu.atb.npu_ring_mla(
++            _giga_shim(
+                 q_nope=q_nope,
+                 q_rope=q_pe,
+                 k_nope=k_nope,
+@@ -865,7 +903,7 @@
+                            dtype=q_nope.dtype), 1)
+             self.prefill_mask = torch.where(prefill_mask == 1, mask_value,
+                                             0).to(q_nope.dtype)
+-        torch_npu.atb.npu_ring_mla(q_nope=q_nope,
++        _giga_shim(q_nope=q_nope,
+                                    q_rope=q_pe,
+                                    k_nope=k_nope,
+                                    k_rope=k_pe,
