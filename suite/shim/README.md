@@ -36,3 +36,22 @@ Serve:
 4. FIA actual_seq_lengths semantics for BSND
 
 Evidence: evidence/5c/ (smoke answers, serve log keylines)
+
+## ACT ACCEPTED (2026-11-22, task 942047, session 5d): 20/20 SEMANTIC TESTS PASSED
+
+Root cause of off-topic generation in earlier sessions: **prefix caching**.
+With --enable-prefix-caching (default), repeated requests sharing the ~1034-token
+role_description prefix hit cached KV blocks incompatible with the decompressed-prefill
+shim path -> coherent-looking but off-topic output. First request on a clean server
+(full prefill through the shim) was always correct.
+
+Fix: serve with **--no-enable-prefix-caching**.
+
+Result (seed=0, temp=0.2, all full prefill through shim):
+- 20/20 tests PASS: 10 sanity (facts/arithmetic/translation), 5 instruction-following
+  (exact repeat, one-word, format), 5 context-invariants (777, password, name, city, EN prompt)
+- Determinism: byte-identical on repeated request
+- TTFT: 0.2s @100 tok, 0.5s @1500 tok (full prefill through shim)
+- npu-smi info + dmon logs captured during generation
+Evidence: evidence/act5d/ (test5d_results.json, shim_calls_verbose.log, decode_callsite.txt,
+npusmi_dmon.log, pipfreeze.txt, serve_nopc_tail.log)
