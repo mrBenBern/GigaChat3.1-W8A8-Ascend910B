@@ -55,3 +55,19 @@ Result (seed=0, temp=0.2, all full prefill through shim):
 - npu-smi info + dmon logs captured during generation
 Evidence: evidence/act5d/ (test5d_results.json, shim_calls_verbose.log, decode_callsite.txt,
 npusmi_dmon.log, pipfreeze.txt, serve_nopc_tail.log)
+
+## SESSION 5e (2026-11-22, task 942187): off-topic root-cause chain finalized
+
+Three-layer causal story (all evidence-backed):
+1. Inference mechanics CORRECT: mask stats equal_ref=True (sum=549676=expected, row0=1048,
+   rowLast=0), FIA synthetic test vs CPU fp32 reference max_diff=0.0077 (bf16 noise level),
+   rowFirst diff=0.0 (perfect causality), inner_precise=2 has no effect.
+2. Prefix caching INCOMPATIBLE with decompressed-prefill shim -> --no-enable-prefix-caching.
+3. Homonym acronyms (bare "MLA") sample wrong expansions from weights at any temperature
+   ("Master Mold Allegiance"/artillery/fan-fiction at temp 0.3/0.2/0.2-seed1) — a W8A8
+   quantization nuance (--disable_anti); full term "Multi-head Latent Attention (MLA)"
+   answers correctly, KV-cache/GQA questions precise. Not an engine bug.
+
+Recommendation for users of the shim: disable prefix caching; prefer full-term prompts;
+consider re-quantization with anti-outlier once msmodelslim supports non-standard MLA dims.
+Evidence: evidence/act5e/ (sm9_*.json, maskstat.log, diskcheck.txt, homonym_matrix.log)
