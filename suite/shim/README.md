@@ -76,3 +76,31 @@ Evidence: evidence/act5e/ (sm9_*.json, maskstat.log, diskcheck.txt, homonym_matr
 ## Model on Hugging Face
 
 Quantized checkpoint + model card: https://huggingface.co/Bentuzzi/GigaChat3.1-10B-A1.8B-W8A8-Ascend910B
+
+## SESSION 5g (2026-11-23, task 942558): prefix caching MADE COMPATIBLE (shim v4)
+
+Root fix for the 5d corruption: the shim never wrote `softmax_lse` and never merged
+`pre_out/prev_lse` (the ring-op contract), so cache-hit context calls merged through
+garbage LSE. Shim v4 restores the contract:
+- fresh branch (seqlen [B], square causal): BSND FIA with softmax_lse_flag=True,
+  writes output AND softmax_lse ([H,T] fp32, FIA ln-scale);
+- context branch (seqlen [2,B]): TND FIA (per-request cumulative ends, sparse_mode=0,
+  no mask) -> output [T,H,D], lse [T,H,1]; zero-length chunks masked to -inf;
+  log-sum-exp merge with pre_out/prev_lse in fp32; writes merged output + merged LSE.
+  BSND fallback (no per-request separation) only if TND raises.
+Validation: PROBE5G_OK - TND probe diff_out=0.0093 (bf16 noise), diff_lse=0.0000;
+merge identity vs full single-shot attention diff=0.0071, lse_diff=0.0000 (fp32 exact).
+Serving with prefix caching ON: 20/20 tests PASS, determinism IDENTICAL,
+engine Prefix cache hit rate 89%, context merges confirmed in live traffic
+(CTXSTAT merged=True used=tnd T=16 S_ctx=1024 lse_finite=True).
+Cache-path outputs are CORRECT but not always byte-identical to the cold path
+(two different numerical routes to the same causal result; bf16 rounding;
+e.g. cold answer verbose, cache-hit answer terse - both correct).
+TTFT p1500: 0.5s (5d, no cache) -> 0.23s (cache warm); identical-request wall time
+1.76s (cold) -> 0.60s (cache hits).
+Known limitation: fresh branch is dense-BSND - batched multi-request prefill would
+cross-attend (all 5d/5g tests are single-request); TND context branch is
+per-request correct.
+Recommendation: prefix caching may stay ENABLED with shim v4.
+Evidence: evidence/act5g/ (test5g_results.json, accept5g.log, chain5g.log,
+chain5g_lfs.log, probe5g.log, shim_calls.log, vllm_tail.log, npusmi_*, pipfreeze)

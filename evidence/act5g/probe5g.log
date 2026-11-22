@@ -1,0 +1,4 @@
+TND_PROBE out [8, 32, 128] torch.bfloat16 | lse [8, 32, 1] torch.float32
+TND_PROBE diff_out=0.0093 diff_lse=0.0000
+MERGE_CHECK merged_vs_full diff=0.0071 lse_diff=0.0000
+PROBE5G_OK

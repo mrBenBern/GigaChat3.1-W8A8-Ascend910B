@@ -1,0 +1,6 @@
+callsites: 0
+Traceback (most recent call last):
+  File "/tmp/patch5g.py", line 7, in <module>
+    assert n == 2
+           ^^^^^^
+AssertionError

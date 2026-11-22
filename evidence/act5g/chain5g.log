@@ -1,0 +1,123 @@
+[01:43:40] pip torch
+[01:44:06] pip vllm
+[01:46:30] pip torch_npu
+[01:46:39] pip vllm-ascend
+[01:47:00] PIP_DONE
+[01:47:00] PROBE5G
+[01:47:18] PROBE_EXIT=1
+Traceback (most recent call last):
+  File "/tmp/probe5g.py", line 61, in <module>
+    diff_o = (out.float() - ref_o.to('npu')).abs().max().item()
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+RuntimeError: The size of tensor a (32) must match the size of tensor b (4) at non-singleton dimension 1
+[ERROR] 2026-11-23-01:47:15 (PID:168, Device:0, RankID:-1) ERR99999 UNKNOWN applicaiton exception
+[01:47:18] LFS_RESTORE
+[01:47:18] LFS_EXIT=1
+[01:47:18] EXTRACTED
+Traceback (most recent call last):
+  File "/tmp/padfix5g.py", line 3, in <module>
+    tc=json.load(open(p))
+                 ^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/models/giga31_w8a8/tokenizer_config.json'
+[01:47:18] TOK_READY
+[01:47:19] PATCH_EXIT=0
+[01:47:19] SERVE_BG_START (prefix caching ON)
+[01:49:43] ACCEPT5G_START
+[01:49:45] ACCEPT_EXIT=1
+  File "/usr/local/python3.11.13/lib/python3.11/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/usr/local/python3.11.13/lib/python3.11/http/client.py", line 996, in send
+    self.connect()
+  File "/usr/local/python3.11.13/lib/python3.11/http/client.py", line 962, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python3.11.13/lib/python3.11/socket.py", line 863, in create_connection
+    raise exceptions[0]
+  File "/usr/local/python3.11.13/lib/python3.11/socket.py", line 848, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/accept5g.py", line 36, in <module>
+    t, w, _, _ = ask(qtext, 30, 0.0, 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/accept5g.py", line 20, in ask
+    with urllib.request.urlopen(req, timeout=240) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python3.11.13/lib/python3.11/urllib/request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python3.11.13/lib/python3.11/urllib/request.py", line 519, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python3.11.13/lib/python3.11/urllib/request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python3.11.13/lib/python3.11/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/local/python3.11.13/lib/python3.11/urllib/request.py", line 1377, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python3.11.13/lib/python3.11/urllib/request.py", line 1351, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 111] Connection refused>
+[01:49:45] CHAIN5G_DONE
+[01:56:17] STAGE2 LFS_RESTORE
+[02:39:49] LFS_EXIT=0
+[02:40:07] EXTRACTED_OK
+[02:40:07] EXTRACTED
+tokfix ok
+[02:40:12] TOK_READY
+[02:40:12] PROBE5G2
+[02:40:27] PROBE_EXIT=0
+TND_PROBE out [8, 32, 128] torch.bfloat16 | lse [8, 32, 1] torch.float32
+TND_PROBE diff_out=0.0093 diff_lse=0.0000
+MERGE_CHECK merged_vs_full diff=0.0071 lse_diff=0.0000
+PROBE5G_OK
+[02:40:27] PATCH_EXIT=1
+[02:40:27] SERVE_BG_START (prefix caching ON)
+[02:42:24] SERVE_UP
+[02:42:24] ACCEPT5G_START
+[02:42:58] ACCEPT_EXIT=0
+CACHE_R1 'Столица Франции — Париж.' | 1.76s | Столица Франции?
+CACHE_R2 'Париж.' | 0.71s | Столица Франции?
+CACHE_R3 'Париж.' | 0.60s | Столица Франции?
+CACHE_TEST Столица Франции? identical=False correct=True walls=[1.76, 0.71, 0.6]
+CACHE_R1 'голубь' | 0.52s | Слово-пароль: голубь
+CACHE_R2 'голубь' | 0.52s | Слово-пароль: голубь
+CACHE_R3 'голубь' | 0.51s | Слово-пароль: голубь
+CACHE_TEST Слово-пароль: голубь identical=True correct=True walls=[0.52, 0.52, 0.51]
+CACHE_SCORE: 1 / 2
+PASS s01 | 0.7s | Париж.
+PASS s02 | 0.3s | 4
+PASS s03 | 0.8s | В неделе 7 дней.
+PASS s04 | 4.1s | Роман «Война и мир» написал русский писатель **Лев Николаевич Толстой**. Это одно из самых известных произведе
+PASS s05 | 0.3s | cat
+PASS s06 | 1.3s | Число 12 больше, чем 9.
+PASS s07 | 0.6s | Токио.
+PASS s08 | 0.4s | 15
+PASS s09 | 4.1s | Днём небо обычно голубого цвета. Это связано с явлением, которое называется **рэлеевское рассеяние**: солнечны
+PASS s10 | 4.1s | В России официальным и основным языком является **русский язык**. Он относится к восточнославянской группе инд
+PASS i01 | 0.3s | ABC
+PASS i02 | 0.6s | тестовая фраза
+PASS i03 | 0.3s | да
+PASS i04 | 0.4s | 42
+PASS i05 | 0.6s | Январь.
+PASS c01 | 1.4s | Твоё любимое число — **777**.
+PASS c02 | 0.5s | голубь
+PASS c03 | 0.3s | 4
+PASS c04 | 0.9s | Тебя зовут Аркадий.
+PASS c05 | 1.0s | Вы живете в городе Пенза.
+SCORE: 20 / 20
+DETERMINISM: IDENTICAL
+p100_cold: TTFT=0.25s total=0.34s chunks=4
+p100_warm: TTFT=0.22s total=0.32s chunks=4
+p500_cold: TTFT=0.23s total=0.52s chunks=6
+p500_warm: TTFT=0.23s total=0.44s chunks=5
+p1500_cold: TTFT=0.29s total=0.60s chunks=6
+p1500_warm: TTFT=0.23s total=0.52s chunks=6
+ACCEPT5G_DONE
+[02:42:58] CHAIN5G2_DONE
