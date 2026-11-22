@@ -71,3 +71,8 @@ Three-layer causal story (all evidence-backed):
 Recommendation for users of the shim: disable prefix caching; prefer full-term prompts;
 consider re-quantization with anti-outlier once msmodelslim supports non-standard MLA dims.
 Evidence: evidence/act5e/ (sm9_*.json, maskstat.log, diskcheck.txt, homonym_matrix.log)
+
+
+## Model on Hugging Face
+
+Quantized checkpoint + model card: https://huggingface.co/Bentuzzi/GigaChat3.1-10B-A1.8B-W8A8-Ascend910B
