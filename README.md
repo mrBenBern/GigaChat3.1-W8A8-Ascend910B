@@ -74,10 +74,14 @@ torch 2.8.0 · torch_npu 2.8.0.post5 · vllm 0.11.0 · vllm-ascend 0.11.0 (`--no
 ## Limitations
 
 - eager mode (graph mode pending), decode ~10–14 tps single stream
-- prefix caching must stay off (see above)
+- prefix caching compatible since shim v4 (2026-11-23): cache-hit answers correct — semantically equal to cold, numerically distinct ~0.007 (two bf16 routes); see `evidence/act5g/`
 - single card, max-model-len 4096
 - quantization ran with `--disable_anti` (see homonym note)
 
 ## License
 
 MIT — original model © Sber; W8A8 quantization, patch and evidence © 2026 MutTechDev.
+## Changelog
+
+- 2026-11-23 — **shim v4: prefix caching made compatible** (ring-merge contract restored: fp32 LSE from FIA + log-sum-exp merge on cached-context calls; merge vs single-shot diff 0.0071 = bf16 noise, LSE diff 0.0000). 20/20 with prefix caching ON, engine cache hit rate 89%. Exact live FIA dims: Q=K=V=192 (v_head_dim=192). Evidence: evidence/act5g/ + suite/shim/shim_block_v4.py.
+- 2026-11-23 — network note for contributors in CN: direct TLS to github.com may fail from some CN networks (`Empty reply from server`); with a SOCKS5 endpoint use `git -c http.proxy=socks5h://HOST:PORT clone/push …`. OpenI (openi.pcl.ac.cn) is reachable directly from CN.
