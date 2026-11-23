@@ -1,0 +1,148 @@
+PASS s01 | 1.8s | Столица Франции — Париж.
+PASS s02 | 0.4s | 4
+PASS s03 | 0.8s | В неделе 7 дней.
+PASS s04 | 4.1s | Роман «Война и мир» написал русский писатель **Лев Николаевич Толстой**. Это одно из самых
+PASS s05 | 0.3s | cat
+PASS s06 | 1.3s | Число 12 больше, чем 9.
+PASS s07 | 0.6s | Токио.
+PASS s08 | 0.4s | 15
+PASS s09 | 4.0s | Днём небо обычно голубого цвета. Это связано с явлением, которое называется **рэлеевское р
+PASS s10 | 4.0s | В России официальным и основным языком является **русский язык**. Он относится к восточнос
+PASS i01 | 0.3s | ABC
+PASS i02 | 0.6s | тестовая фраза
+PASS i03 | 0.3s | да
+PASS i04 | 0.4s | 42
+PASS i05 | 0.6s | Январь.
+PASS c01 | 1.4s | Твоё любимое число — **777**.
+PASS c02 | 0.5s | голубь
+PASS c03 | 0.3s | 4
+PASS c04 | 0.9s | Тебя зовут Аркадий.
+PASS c05 | 1.0s | Вы живете в городе Пенза.
+SCORE_SINGLE: 20 / 20
+DETERMINISM_WITHIN: IDENTICAL
+CONCURRENT_SCORE: 13 / 40 (20.3s)
+  BAD c01 �
+
+## 1.  Problem Statement
+
+**Problem:**  
+Given a list of integers, find the m
+  BAD i03 �
+
+## Explanation
+
+The provided text is a jumbled collection of words and phrase
+  BAD c05 �
+
+## 1.  Problem Analysis
+
+We are given a **directed graph** (edges go from a n
+  BAD c01 �
+
+## 1.  Problem Statement
+
+**Problem:**  
+Given a list of integers, find the m
+  BAD i01 �<task_description>
+```
+[{"task": "CalculateSum", "arguments": {"numbers": [1, 2
+  BAD i01 �<task_description>
+```
+[{"task": "CalculateSum", "arguments": {"numbers": [1, 2
+  BAD s02 �
+
+The user wants me to explain the concept of "cognitive dissonance" in psychol
+  BAD i02 �
+
+## 1.  Введение
+В этой задаче мы будем работать с **динамическим программиров
+  BAD c05 �
+
+## 1.  Problem Analysis
+
+We are given a **directed graph** (edges go from a n
+  BAD s01 
+  BAD s09 �
+
+### 1. Определение и классификация
+**Пневматические системы** — это системы, 
+  BAD i05 �
+
+1. **Дано:**
+   - $ a = 2 $
+   - $ b = 3 $
+   - $ c = 4 $
+
+2. **Необходимо:**
+  BAD c04 �
+
+### 1. Определение и описание
+**Псевдотуморозный синдром** (ПТС) — это клинич
+  BAD c04 �
+
+### 1. Определение и описание
+**Псевдотуморозный синдром** (ПТС) — это клинич
+  BAD c03 �
+
+## 1. Введение в теорию вероятностей
+
+### 1.1. Основные понятия
+
+**Определени
+  BAD s08 �
+
+## 1. Введение
+В данной работе рассматривается **алгоритм поиска кратчайшего 
+  BAD s07 �
+
+## Какая страна первой в мире создала систему социального обеспечения?
+
+**Отв
+  BAD c03 �
+
+## 1. Введение в теорию вероятностей
+
+### 1.1. Основные понятия
+
+**Определени
+  BAD i04 �<task_description>
+
+**Input:**  
+- `n` – number of vertices (1 ≤ n ≤ 10^5)  
+- 
+  BAD s03 
+  BAD s02 �
+
+The user wants me to explain the concept of "cognitive dissonance" in psychol
+  BAD c02 �
+
+## Как использовать "Транзитивность" в математике и логике
+
+Транзитивность — 
+  BAD s04 �
+
+## 1.  Problem Analysis
+
+We are given a **directed graph** with `n` vertices 
+  BAD s07 �
+
+## Какая страна первой в мире создала систему социального обеспечения?
+
+**Отв
+  BAD i05 �
+
+1. **Дано:**
+   - $ a = 2 $
+   - $ b = 3 $
+   - $ c = 4 $
+
+2. **Необходимо:**
+  BAD s04 �
+
+## Understanding the Task
+
+Your request is to **understand the task** describ
+  BAD s06 �
+
+## Как правильно рассчитать количество дней отпуска, если сотрудник работает 
+PHASE_B_DONE

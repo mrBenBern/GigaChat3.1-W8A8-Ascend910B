@@ -1,0 +1,377 @@
+{
+ "phase": "B",
+ "suite_single": {
+  "score": 20,
+  "n": 20,
+  "results": [
+   {
+    "id": "s01",
+    "ok": true,
+    "ans": "Столица Франции — Париж.",
+    "wall": 1.83
+   },
+   {
+    "id": "s02",
+    "ok": true,
+    "ans": "4",
+    "wall": 0.43
+   },
+   {
+    "id": "s03",
+    "ok": true,
+    "ans": "В неделе 7 дней.",
+    "wall": 0.83
+   },
+   {
+    "id": "s04",
+    "ok": true,
+    "ans": "Роман «Война и мир» написал русский писатель **Лев Николаевич Толстой**. Это одно из самых известных",
+    "wall": 4.05
+   },
+   {
+    "id": "s05",
+    "ok": true,
+    "ans": "cat",
+    "wall": 0.33
+   },
+   {
+    "id": "s06",
+    "ok": true,
+    "ans": "Число 12 больше, чем 9.",
+    "wall": 1.33
+   },
+   {
+    "id": "s07",
+    "ok": true,
+    "ans": "Токио.",
+    "wall": 0.62
+   },
+   {
+    "id": "s08",
+    "ok": true,
+    "ans": "15",
+    "wall": 0.41
+   },
+   {
+    "id": "s09",
+    "ok": true,
+    "ans": "Днём небо обычно голубого цвета. Это связано с явлением, которое называется **рэлеевское рассеяние**",
+    "wall": 4.13
+   },
+   {
+    "id": "s10",
+    "ok": true,
+    "ans": "В России официальным и основным языком является **русский язык**. Он относится к восточнославянской ",
+    "wall": 4.08
+   },
+   {
+    "id": "i01",
+    "ok": true,
+    "ans": "ABC",
+    "wall": 0.31
+   },
+   {
+    "id": "i02",
+    "ok": true,
+    "ans": "тестовая фраза",
+    "wall": 0.61
+   },
+   {
+    "id": "i03",
+    "ok": true,
+    "ans": "да",
+    "wall": 0.33
+   },
+   {
+    "id": "i04",
+    "ok": true,
+    "ans": "42",
+    "wall": 0.4
+   },
+   {
+    "id": "i05",
+    "ok": true,
+    "ans": "Январь.",
+    "wall": 0.6
+   },
+   {
+    "id": "c01",
+    "ok": true,
+    "ans": "Твоё любимое число — **777**.",
+    "wall": 1.39
+   },
+   {
+    "id": "c02",
+    "ok": true,
+    "ans": "голубь",
+    "wall": 0.51
+   },
+   {
+    "id": "c03",
+    "ok": true,
+    "ans": "4",
+    "wall": 0.31
+   },
+   {
+    "id": "c04",
+    "ok": true,
+    "ans": "Тебя зовут Аркадий.",
+    "wall": 0.91
+   },
+   {
+    "id": "c05",
+    "ok": true,
+    "ans": "Вы живете в городе Пенза.",
+    "wall": 1.01
+   }
+  ]
+ },
+ "determinism_within": "IDENTICAL",
+ "suite_concurrent": {
+  "score": 31,
+  "n": 40,
+  "rows": [
+   {
+    "id": "s06",
+    "ok": true,
+    "wall": 1.85,
+    "ans": "Число 12 больше, чем 9."
+   },
+   {
+    "id": "c01",
+    "ok": false,
+    "wall": 5.13,
+    "ans": "�\n\n## 1.  Problem Statement\n\n**Problem:**  \nGiven a list of integers, find the m"
+   },
+   {
+    "id": "i03",
+    "ok": true,
+    "wall": 0.87,
+    "ans": "да"
+   },
+   {
+    "id": "c05",
+    "ok": false,
+    "wall": 5.12,
+    "ans": "�\n\n## Как правильно рассчитать и оформить расчет отпускных в 2024 году?\n\nРасчет "
+   },
+   {
+    "id": "c01",
+    "ok": true,
+    "wall": 5.13,
+    "ans": "На самом деле, в вашем вопросе есть небольшая неточность. Вы написали: «7777777»"
+   },
+   {
+    "id": "i01",
+    "ok": false,
+    "wall": 5.12,
+    "ans": "�┏┓┏┓┏┓┏┓┏┓┏┓┏┓┏┓┏┓┏"
+   },
+   {
+    "id": "i01",
+    "ok": false,
+    "wall": 5.13,
+    "ans": "“.издание”. Литературное произведение. Роман. Стихотворение. Поэма. Статья. Стат"
+   },
+   {
+    "id": "s02",
+    "ok": true,
+    "wall": 4.17,
+    "ans": "�\n\nThe question \"Сколько будет 2+2?\" translates to \"What is 2+2?\" in English. Th"
+   },
+   {
+    "id": "s09",
+    "ok": true,
+    "wall": 4.63,
+    "ans": "Днём небо обычно голубого цвета. Это связано с явлением, которое называется **рэ"
+   },
+   {
+    "id": "i02",
+    "ok": true,
+    "wall": 0.68,
+    "ans": "тестовая фраза"
+   },
+   {
+    "id": "c05",
+    "ok": true,
+    "wall": 1.08,
+    "ans": "Вы живете в городе Пенза."
+   },
+   {
+    "id": "s01",
+    "ok": true,
+    "wall": 0.68,
+    "ans": "Париж."
+   },
+   {
+    "id": "s09",
+    "ok": true,
+    "wall": 5.32,
+    "ans": "Днём небо обычно голубого цвета. Это связано с явлением, которое называется **рэ"
+   },
+   {
+    "id": "i05",
+    "ok": true,
+    "wall": 0.75,
+    "ans": "Январь."
+   },
+   {
+    "id": "c04",
+    "ok": true,
+    "wall": 1.19,
+    "ans": "Тебя зовут Аркадий."
+   },
+   {
+    "id": "c04",
+    "ok": false,
+    "wall": 5.62,
+    "ans": "�\n\n### 1. Определение и описание\n**Псевдотуморозный синдром** (ПТС) — это клинич"
+   },
+   {
+    "id": "s03",
+    "ok": true,
+    "wall": 1.35,
+    "ans": "В неделе 7 дней."
+   },
+   {
+    "id": "i02",
+    "ok": false,
+    "wall": 5.62,
+    "ans": "�\n\n**\"Вижу, что вы не можете выбрать цвет, потому что у вас нет цвета в списке.\""
+   },
+   {
+    "id": "s08",
+    "ok": false,
+    "wall": 5.62,
+    "ans": "\n1. **Определение и цель:**\n   - **Definition:** The term \"fetal distress\" refer"
+   },
+   {
+    "id": "s05",
+    "ok": false,
+    "wall": 5.62,
+    "ans": "ụ.\n\n**Problem:**  \nWrite a detailed explanation of the given JavaScript code sni"
+   },
+   {
+    "id": "c03",
+    "ok": true,
+    "wall": 0.44,
+    "ans": "4"
+   },
+   {
+    "id": "i03",
+    "ok": true,
+    "wall": 0.37,
+    "ans": "да"
+   },
+   {
+    "id": "s08",
+    "ok": true,
+    "wall": 0.6,
+    "ans": "15"
+   },
+   {
+    "id": "s07",
+    "ok": true,
+    "wall": 0.93,
+    "ans": "Токио."
+   },
+   {
+    "id": "c03",
+    "ok": true,
+    "wall": 0.43,
+    "ans": "4"
+   },
+   {
+    "id": "i04",
+    "ok": true,
+    "wall": 0.53,
+    "ans": "42"
+   },
+   {
+    "id": "s03",
+    "ok": true,
+    "wall": 1.13,
+    "ans": "В неделе 7 дней."
+   },
+   {
+    "id": "s02",
+    "ok": true,
+    "wall": 0.44,
+    "ans": "4"
+   },
+   {
+    "id": "i04",
+    "ok": true,
+    "wall": 0.6,
+    "ans": "42"
+   },
+   {
+    "id": "c02",
+    "ok": true,
+    "wall": 0.69,
+    "ans": "голубь"
+   },
+   {
+    "id": "s10",
+    "ok": true,
+    "wall": 4.63,
+    "ans": "В России официальным и основным языком является **русский язык**. Он относится к"
+   },
+   {
+    "id": "c02",
+    "ok": true,
+    "wall": 0.7,
+    "ans": "голубь"
+   },
+   {
+    "id": "s04",
+    "ok": true,
+    "wall": 4.5,
+    "ans": "Роман «Война и мир» написал русский писатель **Лев Николаевич Толстой**. Это одн"
+   },
+   {
+    "id": "s07",
+    "ok": true,
+    "wall": 0.66,
+    "ans": "Токио."
+   },
+   {
+    "id": "i05",
+    "ok": true,
+    "wall": 0.79,
+    "ans": "Январь."
+   },
+   {
+    "id": "s05",
+    "ok": true,
+    "wall": 0.43,
+    "ans": "cat"
+   },
+   {
+    "id": "s04",
+    "ok": true,
+    "wall": 4.23,
+    "ans": "Роман «Война и мир» написал русский писатель **Лев Николаевич Толстой**. Это одн"
+   },
+   {
+    "id": "s06",
+    "ok": true,
+    "wall": 1.41,
+    "ans": "Число 12 больше, чем 9."
+   },
+   {
+    "id": "s10",
+    "ok": false,
+    "wall": 4.17,
+    "ans": "�\n\n## 1. Введение\nВ данной работе рассматривается **алгоритм **`A`** для решения"
+   },
+   {
+    "id": "s01",
+    "ok": true,
+    "wall": 1.04,
+    "ans": "Столица Франции — Париж."
+   }
+  ]
+ },
+ "engine_tail": ".5 tokens/s, Avg generation throughput: 9.8 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 91.9%\n\u001b[1;36m(APIServer pid=1849)\u001b[0;0m INFO 11-23 19:39:15 [loggers.py:127] Engine 000: Avg prompt throughput: 2694.4 tokens/s, Avg generation throughput: 34.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 95.6%\n\u001b[1;36m(APIServer pid=1849)\u001b[0;0m INFO 11-23 19:39:25 [loggers.py:127] Engine 000: Avg prompt throughput: 2089.1 tokens/s, Avg generation throughput: 34.2 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 96.4%\n\u001b[1;36m(APIServer pid=1849)\u001b[0;0m INFO 11-23 19:39:35 [loggers.py:127] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 96.4%"
+}

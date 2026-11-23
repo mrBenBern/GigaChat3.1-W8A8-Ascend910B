@@ -1,0 +1,377 @@
+{
+ "phase": "B",
+ "suite_single": {
+  "score": 20,
+  "n": 20,
+  "results": [
+   {
+    "id": "s01",
+    "ok": true,
+    "ans": "Столица Франции — Париж.",
+    "wall": 1.81
+   },
+   {
+    "id": "s02",
+    "ok": true,
+    "ans": "4",
+    "wall": 0.31
+   },
+   {
+    "id": "s03",
+    "ok": true,
+    "ans": "В неделе 7 дней.",
+    "wall": 0.78
+   },
+   {
+    "id": "s04",
+    "ok": true,
+    "ans": "Роман «Война и мир» написал Лев Николаевич Толстой. Этот знаменитый роман был опубликован в 1869 год",
+    "wall": 4.18
+   },
+   {
+    "id": "s05",
+    "ok": true,
+    "ans": "The English word for \"кот\" is **cat**.",
+    "wall": 1.33
+   },
+   {
+    "id": "s06",
+    "ok": true,
+    "ans": "Число **12** больше, чем **9**.",
+    "wall": 1.42
+   },
+   {
+    "id": "s07",
+    "ok": true,
+    "ans": "Столица Японии — Токио. Это крупнейший город страны, расположенный на острове Хонсю. Токио является ",
+    "wall": 4.06
+   },
+   {
+    "id": "s08",
+    "ok": true,
+    "ans": "15",
+    "wall": 0.41
+   },
+   {
+    "id": "s09",
+    "ok": true,
+    "ans": "Днём небо обычно имеет голубой цвет. Это происходит из-за явления, называемого **рэлеевским рассеяни",
+    "wall": 4.14
+   },
+   {
+    "id": "s10",
+    "ok": true,
+    "ans": "В России официальным государственным языком является русский язык. Он относится к восточнославянской",
+    "wall": 4.11
+   },
+   {
+    "id": "i01",
+    "ok": true,
+    "ans": "ABC",
+    "wall": 0.28
+   },
+   {
+    "id": "i02",
+    "ok": true,
+    "ans": "Тестовая фраза.",
+    "wall": 0.59
+   },
+   {
+    "id": "i03",
+    "ok": true,
+    "ans": "да",
+    "wall": 0.29
+   },
+   {
+    "id": "i04",
+    "ok": true,
+    "ans": "42",
+    "wall": 0.38
+   },
+   {
+    "id": "i05",
+    "ok": true,
+    "ans": "Январь.",
+    "wall": 0.58
+   },
+   {
+    "id": "c01",
+    "ok": true,
+    "ans": "Твой любимый ответ — 777. 😊",
+    "wall": 1.36
+   },
+   {
+    "id": "c02",
+    "ok": true,
+    "ans": "Голубь.",
+    "wall": 0.57
+   },
+   {
+    "id": "c03",
+    "ok": true,
+    "ans": "4",
+    "wall": 0.28
+   },
+   {
+    "id": "c04",
+    "ok": true,
+    "ans": "Тебя зовут Аркадий.",
+    "wall": 0.87
+   },
+   {
+    "id": "c05",
+    "ok": true,
+    "ans": "Вы живете в городе Пенза.",
+    "wall": 0.96
+   }
+  ]
+ },
+ "determinism_within": "IDENTICAL",
+ "suite_concurrent": {
+  "score": 38,
+  "n": 40,
+  "rows": [
+   {
+    "id": "s06",
+    "ok": true,
+    "wall": 2.14,
+    "ans": "Число **12** больше, чем **9**."
+   },
+   {
+    "id": "c01",
+    "ok": true,
+    "wall": 2.25,
+    "ans": "Твой любимый ответ — 777. 😊"
+   },
+   {
+    "id": "i03",
+    "ok": true,
+    "wall": 0.94,
+    "ans": "да"
+   },
+   {
+    "id": "c05",
+    "ok": true,
+    "wall": 1.76,
+    "ans": "Вы живете в городе Пенза."
+   },
+   {
+    "id": "c01",
+    "ok": false,
+    "wall": 5.7,
+    "ans": "<|pretext|>\n<|pretext|>Write a Python script that uses the `requests` library to"
+   },
+   {
+    "id": "i01",
+    "ok": true,
+    "wall": 1.04,
+    "ans": "ABC"
+   },
+   {
+    "id": "i01",
+    "ok": true,
+    "wall": 1.04,
+    "ans": "ABC"
+   },
+   {
+    "id": "s02",
+    "ok": true,
+    "wall": 1.04,
+    "ans": "4"
+   },
+   {
+    "id": "s09",
+    "ok": true,
+    "wall": 4.97,
+    "ans": "Днём небо обычно имеет голубой цвет. Это происходит из-за явления, называемого *"
+   },
+   {
+    "id": "i02",
+    "ok": true,
+    "wall": 0.82,
+    "ans": "Тестовая фраза."
+   },
+   {
+    "id": "c05",
+    "ok": true,
+    "wall": 1.34,
+    "ans": "Вы живете в городе Пенза."
+   },
+   {
+    "id": "s01",
+    "ok": true,
+    "wall": 1.2,
+    "ans": "Столица Франции — Париж."
+   },
+   {
+    "id": "s09",
+    "ok": true,
+    "wall": 4.97,
+    "ans": "Днём небо обычно имеет голубой цвет. Это происходит из-за явления, называемого *"
+   },
+   {
+    "id": "i05",
+    "ok": true,
+    "wall": 0.82,
+    "ans": "Январь."
+   },
+   {
+    "id": "c04",
+    "ok": true,
+    "wall": 1.13,
+    "ans": "Тебя зовут Аркадий."
+   },
+   {
+    "id": "c04",
+    "ok": true,
+    "wall": 1.15,
+    "ans": "Тебя зовут Аркадий."
+   },
+   {
+    "id": "s03",
+    "ok": true,
+    "wall": 1.03,
+    "ans": "В неделе 7 дней."
+   },
+   {
+    "id": "i02",
+    "ok": true,
+    "wall": 0.77,
+    "ans": "Тестовая фраза."
+   },
+   {
+    "id": "s08",
+    "ok": true,
+    "wall": 0.47,
+    "ans": "15"
+   },
+   {
+    "id": "s05",
+    "ok": true,
+    "wall": 1.86,
+    "ans": "The English word for \"кот\" is **cat**."
+   },
+   {
+    "id": "c03",
+    "ok": true,
+    "wall": 0.67,
+    "ans": "4"
+   },
+   {
+    "id": "i03",
+    "ok": true,
+    "wall": 0.55,
+    "ans": "да"
+   },
+   {
+    "id": "s08",
+    "ok": false,
+    "wall": 5.01,
+    "ans": "<think>\n```python\nimport random\nimport time\n\ndef guess_the_number():\n    # Gener"
+   },
+   {
+    "id": "s07",
+    "ok": true,
+    "wall": 4.89,
+    "ans": "Столица Японии — Токио. Это крупнейший город страны, расположенный на острове Хо"
+   },
+   {
+    "id": "c03",
+    "ok": true,
+    "wall": 0.48,
+    "ans": "4"
+   },
+   {
+    "id": "i04",
+    "ok": true,
+    "wall": 0.58,
+    "ans": "42"
+   },
+   {
+    "id": "s03",
+    "ok": true,
+    "wall": 0.95,
+    "ans": "В неделе 7 дней."
+   },
+   {
+    "id": "s02",
+    "ok": true,
+    "wall": 0.37,
+    "ans": "4"
+   },
+   {
+    "id": "i04",
+    "ok": true,
+    "wall": 0.47,
+    "ans": "42"
+   },
+   {
+    "id": "c02",
+    "ok": true,
+    "wall": 0.69,
+    "ans": "Голубь."
+   },
+   {
+    "id": "s10",
+    "ok": true,
+    "wall": 4.62,
+    "ans": "В России официальным и основным языком является **русский язык**. Он относится к"
+   },
+   {
+    "id": "c02",
+    "ok": true,
+    "wall": 0.8,
+    "ans": "Голубь."
+   },
+   {
+    "id": "s04",
+    "ok": true,
+    "wall": 4.59,
+    "ans": "Роман «Война и мир» написал великий русский писатель **Лев Николаевич Толстой**."
+   },
+   {
+    "id": "s07",
+    "ok": true,
+    "wall": 4.59,
+    "ans": "Столица Японии — Токио. Это крупнейший город страны, расположенный на острове Хо"
+   },
+   {
+    "id": "i05",
+    "ok": true,
+    "wall": 0.72,
+    "ans": "Январь."
+   },
+   {
+    "id": "s05",
+    "ok": true,
+    "wall": 1.48,
+    "ans": "The English word for \"кот\" is **cat**."
+   },
+   {
+    "id": "s04",
+    "ok": true,
+    "wall": 4.38,
+    "ans": "Роман «Война и мир» написал Лев Николаевич Толстой. Этот знаменитый роман был оп"
+   },
+   {
+    "id": "s06",
+    "ok": true,
+    "wall": 1.55,
+    "ans": "Число **12** больше, чем **9**."
+   },
+   {
+    "id": "s10",
+    "ok": true,
+    "wall": 4.31,
+    "ans": "В России официальным государственным языком является русский язык. Он относится "
+   },
+   {
+    "id": "s01",
+    "ok": true,
+    "wall": 0.96,
+    "ans": "Столица Франции — Париж."
+   }
+  ]
+ },
+ "engine_tail": ".5 tokens/s, Avg generation throughput: 9.8 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 91.9%\n\u001b[1;36m(APIServer pid=1849)\u001b[0;0m INFO 11-23 19:39:15 [loggers.py:127] Engine 000: Avg prompt throughput: 2694.4 tokens/s, Avg generation throughput: 34.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 95.6%\n\u001b[1;36m(APIServer pid=1849)\u001b[0;0m INFO 11-23 19:39:25 [loggers.py:127] Engine 000: Avg prompt throughput: 2089.1 tokens/s, Avg generation throughput: 34.2 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 96.4%\n\u001b[1;36m(APIServer pid=1849)\u001b[0;0m INFO 11-23 19:39:35 [loggers.py:127] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 96.4%"
+}

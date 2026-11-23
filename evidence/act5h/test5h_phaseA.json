@@ -1,0 +1,96 @@
+{
+ "phase": "A",
+ "mixed8": {
+  "score": 2,
+  "n": 8,
+  "rows": [
+   {
+    "ans": "Столица Франции — Париж.",
+    "ok": true,
+    "wall": 2.45
+   },
+   {
+    "ans": "4",
+    "ok": true,
+    "wall": 1.94
+   },
+   {
+    "ans": "Ваш вопрос не ясен. Пожалуйста, переформулируйте его.",
+    "ok": false,
+    "wall": 3.45
+   },
+   {
+    "ans": "В ответе укажите только число. 2",
+    "ok": false,
+    "wall": 2.75
+   },
+   {
+    "ans": "Ваш запрос не ясен. Пожалуйста, переформулируйте вопрос.",
+    "ok": false,
+    "wall": 3.45
+   },
+   {
+    "ans": "Фамилия «Мирошниченко».",
+    "ok": false,
+    "wall": 2.65
+   },
+   {
+    "ans": "4\n</output>\n\nПрошу уточнить, что именно вы хотите узнать или решить. Фраза не совсем понятна. Пожалуйста, пер",
+    "ok": false,
+    "wall": 4.7
+   },
+   {
+    "ans": "В английском языке слово \"one\" переводится как \"один\".",
+    "ok": false,
+    "wall": 3.15
+   }
+  ]
+ },
+ "same8": {
+  "score": 8,
+  "n": 8,
+  "rows": [
+   {
+    "ans": "Париж.",
+    "ok": true,
+    "wall": 1.1
+   },
+   {
+    "ans": "Париж",
+    "ok": true,
+    "wall": 1.1
+   },
+   {
+    "ans": "Париж",
+    "ok": true,
+    "wall": 1.1
+   },
+   {
+    "ans": "Париж",
+    "ok": true,
+    "wall": 1.1
+   },
+   {
+    "ans": "Париж",
+    "ok": true,
+    "wall": 1.1
+   },
+   {
+    "ans": "Париж",
+    "ok": true,
+    "wall": 1.1
+   },
+   {
+    "ans": "Париж",
+    "ok": true,
+    "wall": 1.1
+   },
+   {
+    "ans": "Париж",
+    "ok": true,
+    "wall": 1.1
+   }
+  ]
+ },
+ "freshstat": "(EngineCore_DP0 pid=875) [FRESHSTAT] fresh_triu used=bsnd T=1040 S=1040 B=1 lse=ok\n(EngineCore_DP0 pid=875) [FRESHSTAT] fresh_triu used=bsnd T=1040 S=1040 B=1 lse=ok\n(EngineCore_DP0 pid=875) [FRESHSTAT] fresh_triu used=bsnd T=1040 S=1040 B=1 lse=ok\n(EngineCore_DP0 pid=875) [FRESHSTAT] fresh_triu used=bsnd T=1040 S=1040 B=1 lse=ok\n(EngineCore_DP0 pid=875) [FRESHSTAT] fresh_triu used=bsnd T=1040 S=1040 B=1 lse=ok\n(EngineCore_DP0 pid=875) [FRESHSTAT] fresh_triu used=bsnd T=1040 S=1040 B=1 lse=ok"
+}

@@ -104,3 +104,56 @@ per-request correct.
 Recommendation: prefix caching may stay ENABLED with shim v4.
 Evidence: evidence/act5g/ (test5g_results.json, accept5g.log, chain5g.log,
 chain5g_lfs.log, probe5g.log, shim_calls.log, vllm_tail.log, npusmi_*, pipfreeze)
+
+## SESSION 5h (2026-11-23, task 943225): concurrency smoke — shim v6 (fresh-varlen + per-request context loop)
+
+Question left open after 5g ("is the dense fresh branch at batch>1 a crash or
+silent corruption?") answered empirically:
+
+- Phase A (v4 behavior, PC ON, 8 parallel mixed prompts): MIXED8 = 2/8 — NO crash,
+  SILENT CORRUPTION (cross-attention between different requests merged into one
+  prefill step). SAME8 = 8/8 (identical prompts cannot detect cross-attention).
+- Phase B (v5 attempt, TND varlen fresh): 182x FIA rejection
+  "When Layout is TND, sparseMode=0, not support attentionMask" -> silent fallback
+  to dense BSND -> corruption remained. Lesson: silent operator fallbacks hide
+  contract violations; assert, don't fall back.
+
+Isolated probes (probe5h2-6.py, seed=0, H=32 D=192):
+- TND + sparse_mode=3 + triu int8 2048x2048 mask = CORRECT fresh-varlen kernel
+  (max diff 0.0039-0.0082 vs per-request reference, even and uneven lengths);
+- TND without mask does NOT isolate requests (diff ~4.0) — for context attention
+  only a per-request loop of TND no-mask calls is correct (diff 0.0022);
+- npu_paged_cache_load packs output rows request-major ([0,0,2,2] / [0,2,2]).
+
+Shim v6 (shim_block_v6.py, supersedes v4/v5): 4 branches — fresh B=1 dense BSND;
+fresh B>1 TND+sparse3 varlen; context B=1 single TND call; context B>1 per-request
+TND loop with fp32 log-sum-exp merge into pre_out/prev_lse.
+
+Concurrent run history (40-task 8-way burst, semantic asserts):
+v6 21/40 (offset bug: acc not advanced on skip) -> v6.1 0/40 crash
+"queryT(6) must equal last element of actualSeqenceLengthQ(31)" (double
+accumulation -> slices overrun; also documents the 0.11.0 ring contract:
+row0=query_lens of THIS step, q carries only scheduled tokens) ->
+v6.2 instrumented (CTXINFO/LOOPCLIP/FRESHVAR telemetry, slice guards) 31/40 ->
+v6.2 fixed, PC ON 13/40 -> PC OFF (--no-enable-prefix-caching) 38/40 in 11.8s.
+
+Verdict:
+- fresh-varlen (TND+sparse3) is correct under 8-way concurrency (208 FRESHVAR
+  calls, zero exceptions, probes exact);
+- with prefix caching ON the context-merge path still corrupts under batching
+  (13/40) — the per-request loop + LSE merge is numerically correct in probes
+  but production-grade chunked-context batching needs upstream work
+  (0.11.0 calls _compute_prefill_context per chunk with full-tensor pre_out);
+- RECOMMENDATION for concurrent serving on this stack: --no-enable-prefix-caching
+  (38/40; remaining 2 BAD are template-echo answers - <|pretext|> / <think> -
+  suspected native decode path at B>1, not the shim; single-request acceptance
+  from 5d/5g remains the canonical gate).
+For "first publicly documented W8A8 inference on Ascend 910B" nothing changes:
+single-request 20/20 + determinism + PC 89% hit rate (5g) is the claim basis;
+concurrency is documented as best-effort with explicit numbers.
+
+Note: npu-smi dmon/info files are empty this session (collector did not flush);
+hardware-execution evidence for the checkpoint is in act5d/act5g runs.
+Evidence: evidence/act5h/ (5 run JSONs incl. phaseA MIXED8/SAME8, phase logs,
+chain5h.log, chain5h_lfs.log, patch5h.log, patch6.log, shim_telemetry.log,
+vllm tails x3, pipfreeze); suite/shim/{shim_block_v6.py, probe5h2..probe5h6.py}.
