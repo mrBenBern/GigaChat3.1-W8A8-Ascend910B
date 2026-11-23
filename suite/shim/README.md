@@ -1,8 +1,8 @@
 
 # GigaChat3.1 W8A8 on Ascend 910B — FIA shim (final, v10)
 
-AtbRingMLAGetWorkspaceSize crashes on real prefill (vllm-ascend 0.11.0/0.13.0, CANN 8.3/8.5, torch_npu 2.7.1/2.8.0.post5).
-Fix = direct patch of installed vllm_ascend/attention/mla_v1.py (71-line diff):
+AtbRingMLAGetWorkspaceSize crashes on real prefill (vllm-ascend 0.11.0/0.13.0, CANN 8.3/8.5, torch_npu 2.7.1/2.8.0.post5; on 0.13.0 the crash already fires in profile_run; the shim itself is verified on 0.11.0 only). Consolidated crash record: evidence/crash/README.md.
+Fix = shim installed into vllm_ascend/attention/mla_v1.py (current block: v6; the v1 diff below is kept for reference):
 
 1. `_giga_shim(**kw)` replaces both `torch_npu.atb.npu_ring_mla(` call sites:
    decompress cat(q_nope,q_rope)->[T,H,192], cat(k_nope,k_rope)->[S,H,192], value=[S,H,192]
@@ -11,7 +11,9 @@ Fix = direct patch of installed vllm_ascend/attention/mla_v1.py (71-line diff):
 2. mask: ring mask is 512x512 -> rebuild bool triu [T,S] when 512 < T; bool semantics (True=masked)
 3. `_v_up_proj` _C_ascend batch_matmul_transpose fast-path disabled (PyPI wheel has no binary) -> torch.bmm
 
-Apply:
+Apply (current shim v6):
+    python apply_shim.py       # backs up mla_v1.py, prepends shim_block_v6.py, replaces both call sites
+Legacy v1 (the 71-line diff described below, single-request only):
     cp vllm_ascend/attention/mla_v1.py mla_v1.py.bak
     patch vllm_ascend/attention/mla_v1.py < giga31_shim.patch
 Serve:
@@ -45,7 +47,10 @@ role_description prefix hit cached KV blocks incompatible with the decompressed-
 shim path -> coherent-looking but off-topic output. First request on a clean server
 (full prefill through the shim) was always correct.
 
-Fix: serve with **--no-enable-prefix-caching**.
+Fix at the time (5d): serve with **--no-enable-prefix-caching**.
+*Superseded 2026-11-23: shim v4 implements the ring-merge contract, so prefix caching is
+compatible for single-request serving (see SESSION 5g); for concurrent traffic the flag is
+still recommended (SESSION 5h).*
 
 Result (seed=0, temp=0.2, all full prefill through shim):
 - 20/20 tests PASS: 10 sanity (facts/arithmetic/translation), 5 instruction-following
@@ -62,13 +67,14 @@ Three-layer causal story (all evidence-backed):
 1. Inference mechanics CORRECT: mask stats equal_ref=True (sum=549676=expected, row0=1048,
    rowLast=0), FIA synthetic test vs CPU fp32 reference max_diff=0.0077 (bf16 noise level),
    rowFirst diff=0.0 (perfect causality), inner_precise=2 has no effect.
-2. Prefix caching INCOMPATIBLE with decompressed-prefill shim -> --no-enable-prefix-caching.
+2. Prefix caching INCOMPATIBLE with decompressed-prefill shim (as of shim v1–v3) -> --no-enable-prefix-caching.
+   *(fixed in shim v4, see SESSION 5g)*
 3. Homonym acronyms (bare "MLA") sample wrong expansions from weights at any temperature
    ("Master Mold Allegiance"/artillery/fan-fiction at temp 0.3/0.2/0.2-seed1) — a W8A8
    quantization nuance (--disable_anti); full term "Multi-head Latent Attention (MLA)"
    answers correctly, KV-cache/GQA questions precise. Not an engine bug.
 
-Recommendation for users of the shim: disable prefix caching; prefer full-term prompts;
+Recommendation as of 5e (first clause superseded by shim v4, see 5g/5h): disable prefix caching; prefer full-term prompts;
 consider re-quantization with anti-outlier once msmodelslim supports non-standard MLA dims.
 Evidence: evidence/act5e/ (sm9_*.json, maskstat.log, diskcheck.txt, homonym_matrix.log)
 
@@ -101,7 +107,7 @@ TTFT p1500: 0.5s (5d, no cache) -> 0.23s (cache warm); identical-request wall ti
 Known limitation: fresh branch is dense-BSND - batched multi-request prefill would
 cross-attend (all 5d/5g tests are single-request); TND context branch is
 per-request correct.
-Recommendation: prefix caching may stay ENABLED with shim v4.
+Recommendation: prefix caching may stay ENABLED with shim v4 (single-request serving; for concurrency see SESSION 5h).
 Evidence: evidence/act5g/ (test5g_results.json, accept5g.log, chain5g.log,
 chain5g_lfs.log, probe5g.log, shim_calls.log, vllm_tail.log, npusmi_*, pipfreeze)
 
