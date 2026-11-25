@@ -17,7 +17,7 @@
 | Full QA round-trip | 0.3–1.5s |
 | Attention operator | verified vs CPU-fp32 reference: max_diff 0.0077 (bf16 noise), causality perfect |
 | Mask | formally verified: sum/rows/`equal_ref=True` against causal reference |
-| NPU evidence | npu-smi info + dmon captured during generation |
+| NPU evidence | pip freeze + full engine serve logs archived; npu-smi capture FAILED in 5d/5g (files empty — honest note, recapture planned; see docs/ACT-INFERENCE.md) |
 | Prefix caching (shim v4, 2026-11-23) | **compatible**: 20/20 with caching ON, engine hit rate 89%, identical request 1.76s → 0.60s |
 | Concurrency (shim v6, 2026-11-23) | 8 parallel requests with different prompts: **38/40** with `--no-enable-prefix-caching`; with caching ON the batched context merge still corrupts (13/40) |
 
@@ -81,7 +81,7 @@ torch 2.8.0 · torch_npu 2.8.0.post5 · vllm 0.11.0 · vllm-ascend 0.11.0 (`--no
 
 ## Limitations
 
-- eager mode (graph mode pending), decode ~10–14 tps single stream
+- eager mode (graph mode pending), decode ~10 tps single stream (window-averaged 8–9.3 t/s in evidence serve logs; dedicated benchmark pending)
 - prefix caching compatible since shim v4 (2026-11-23): cache-hit answers correct — semantically equal to cold, numerically distinct ~0.007 (two bf16 routes); see `evidence/act5g/`
 - concurrency: with prefix caching ON the batched context merge still corrupts answers (13/40 in an 8-way burst); for concurrent serving use `--no-enable-prefix-caching` (38/40, shim v6); see `evidence/act5h/`
 - the shim is verified on vllm-ascend 0.11.0 only; 0.13.0 has identical call-sites but is untested
